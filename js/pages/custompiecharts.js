@@ -1,0 +1,243 @@
+	$(function() {
+		var data = [],
+			series = Math.floor(Math.random() * 6) + 3;
+
+		for (var i = 0; i < series; i++) {
+			data[i] = {
+				label: "Series" + (i + 1),
+				data: Math.floor(Math.random() * 100) + 1
+			}
+		}
+			$.plot("#placeholdernolegend", data, {
+				series: {
+					pie: { 
+						show: true
+					}
+				},
+				legend: {
+					show: false
+				}, colors: [ '#418BCA', '#F89A14', '#01BC8C', '#EF6F6C', '#67C5DF']
+			});
+			$("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+	});
+
+	$(function() {		
+		var data = [],
+			series = Math.floor(Math.random() * 6) + 3;
+
+		for (var i = 0; i < series; i++) {
+			data[i] = {
+				label: "Series" + (i + 1),
+				data: Math.floor(Math.random() * 100) + 1
+			}
+		}
+	$.plot('#placeholderradiuslabel', data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 1,
+						label: {
+							show: true,
+							radius: 3/4,
+							formatter: labelFormatter,
+							background: {
+								opacity: 0.5
+							}
+						}
+					}
+				},
+				legend: {
+					show: false
+				}, colors: [ '#418BCA', '#F89A14', '#01BC8C', '#EF6F6C', '#67C5DF']
+			});
+	$("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+	}); 
+	//end of label radius pie charts
+
+	$(function() {		
+		var data = [],
+			series = Math.floor(Math.random() * 6) + 3;
+
+		for (var i = 0; i < series; i++) {
+			data[i] = {
+				label: "Series" + (i + 1),
+				data: Math.floor(Math.random() * 100) + 1
+			}
+		}
+	$("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+	}); 
+	//end of Styled labeld pie charts
+
+	$(function() {		
+		var data = [],
+			series = Math.floor(Math.random() * 6) + 3;
+
+		for (var i = 0; i < series; i++) {
+			data[i] = {
+				label: "Series" + (i + 1),
+				data: Math.floor(Math.random() * 100) + 1
+			}
+		}
+
+		$("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+	}); 
+	//end of Styled labeld pie charts
+	$(function() {		
+		var data = [],
+			series = Math.floor(Math.random() * 6) + 3;
+
+		for (var i = 0; i < series; i++) {
+			data[i] = {
+				label: "Series" + (i + 1),
+				data: Math.floor(Math.random() * 100) + 1
+			}
+		}
+		$.plot('#placeholderrectangularpie', data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 500,
+						label: {
+							show: true,
+							formatter: labelFormatter,
+							threshold: 0.1
+						}
+					}
+				},
+				legend: {
+					show: false
+				}, colors: [ '#418BCA', '#F89A14', '#01BC8C', '#EF6F6C', '#67C5DF']
+			});
+		$("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+	}); 
+	//end of Rectangular pie charts
+
+	$(function() {		
+		var data = [],
+			series = Math.floor(Math.random() * 6) + 3;
+
+		for (var i = 0; i < series; i++) {
+			data[i] = {
+				label: "Series" + (i + 1),
+				data: Math.floor(Math.random() * 100) + 1
+			}
+		}
+		$.plot('#placeholdertiltedpie', data, {
+				series: {
+					pie: { 
+						show: true,
+						radius: 1,
+						tilt: 0.5,
+						label: {
+							show: true,
+							radius: 1,
+							formatter: labelFormatter,
+							background: {
+								opacity: 0.8
+							}
+						},
+						combine: {
+							color: "#999",
+							threshold: 0.1
+						}
+					}
+				},
+				legend: {
+					show: false
+				}, colors: [ '#418BCA', '#F89A14', '#01BC8C', '#EF6F6C', '#67C5DF']
+			});
+
+		$("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+	}); 
+	//end of Tilted pie charts
+
+	$(function() {		
+		var data = [],
+			series = Math.floor(Math.random() * 6) + 3;
+
+		for (var i = 0; i < series; i++) {
+			data[i] = {
+				label: "Series" + (i + 1),
+				data: Math.floor(Math.random() * 100) + 1
+			}
+		}
+		$.plot('#placeholderdonuthole', data, {
+				series: {
+					pie: { 
+						innerRadius: 0.5,
+						show: true
+					}
+				}, colors: [ '#418BCA', '#F89A14', '#01BC8C', '#EF6F6C', '#67C5DF']
+			});
+		$("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+	}); 
+	//end of Donet Hole pie charts
+	function labelFormatter(label, series) {
+		return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
+	}
+
+	//
+
+	function setCode(lines) {
+		$("#code").text(lines.join("\n"));
+	}
+
+// d3pie chart code
+
+
+    var pie = new d3pie("pie4", {
+        size: {
+            pieInnerRadius: "80%",
+            canvasHeight: 350,
+            canvasWidth: 350
+        },
+        header: {
+            title: {
+                text: "A Simple Donut Pie"
+            },
+            location: "pie-center"
+        },
+        data: {
+            sortOrder: "label-asc",
+            content: [
+                { label: "JavaScript", value: 1, color:"#418BCA" },
+                { label: "Ruby", value: 2, color:"#01BC8C" },
+                { label: "Java", value: 3, color:"#F89A14" },
+                { label: "C++", value: 2, color:"#67C5DF" },
+                { label: "Objective-C", value: 6,color:"#EF6F6C"}
+            ]
+        },
+        tooltips: {
+            enabled: true,
+            type: "placeholder",
+            string: "{label}, {value}, {percentage}%"
+        }
+    });
+
+	/*------c3 pie chart----*/
+
+    var chart = c3.generate({
+        bindto: '#chart',
+        data: {
+            // iris data from R
+            columns: [
+                ['data1', 30],
+                ['data2', 120],
+                ['data3', 85]
+            ],
+            type : 'pie'
+        }
+    });
+
+	/*--morris donut chart--*/
+
+	Morris.Donut({
+		element: 'morris-chart',
+        colors:['#418BCA', '#01BC8C', '#F89A14'],
+		data: [
+			{label: "Data1", value: 12},
+			{label: "Data2", value: 30},
+			{label: "Data3", value: 20}
+		]
+	});
+

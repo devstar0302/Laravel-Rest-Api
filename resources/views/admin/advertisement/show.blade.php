@@ -1,0 +1,125 @@
+@extends('admin/layouts/default')
+{{-- Page title --}}
+@section('title')
+    {{ _t('Advertisement Detail', [], $_SESSION['lang']) }}
+    @parent
+@stop
+
+{{-- page level styles --}}
+@section('header_styles')
+    <link href="{{ asset('assets/vendors/bootstrap3-wysihtml5-bower/css/bootstrap3-wysihtml5.min.css') }}"  rel="stylesheet" media="screen"/>
+    <link href="{{ asset('assets/css/pages/editor.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/vendors/jasny-bootstrap/css/jasny-bootstrap.css') }}" rel="stylesheet" />
+
+    <link href="/vendors/daterangepicker/css/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <link href="/vendors/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="/vendors/clockface/clockface.css" rel="stylesheet" type="text/css"/>
+    <link href="/vendors/jasny-bootstrap/jasny-bootstrap.min.css" rel="stylesheet" type="text/css" />
+@stop
+
+{{-- Page content --}}
+@section('content')
+
+    <section class="content-header">
+        <!--section starts-->
+        <h1>{{ _t('Advertisement Detail', [], $_SESSION['lang']) }}</h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="">
+                    <i class="livicon" data-name="home" data-size="14" data-loop="true"></i>
+                    {{ _t(config('Convert.dashboard')[0], [], $_SESSION['lang']) }}
+                </a>
+            </li>
+            <li>
+                <a href="#">{{ _t('Advertisements', [], $_SESSION['lang']) }}</a>
+            </li>
+            <li class="active">{{ _t('Advertisement Detail', [], $_SESSION['lang']) }}</li>
+        </ol>
+    </section>
+
+    <div class="panel-body" style="width:90%;margin-left:5%">
+
+                <div class="form-group has-success" style="margin-top:20px;">
+                </div>
+                <!--<form role="form" action="{{ route('admin.notification.adddata') }}" method="POST" enctype="multipart/form-data">-->
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+
+                    <div class="form-group has-success">
+                        <label class="control-label" style="font-size: 120%" for="name">{{ _t('Advertisement Title', [], $_SESSION['lang']) }}</label>
+                        <div>
+                            <input type="text" class="form-control" name="title" value="{{ $notification->title }}" placeholder="notification title" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="control-label" style="font-size: 120%" for="name">{{ _t('Advertisement Description', [], $_SESSION['lang']) }}</label>
+
+                        <div class="row">
+                            <div class="panel panel-success">
+                                <div class="bootstrap-admin-panel-content">
+                                    <textarea id="ckeditor_full" name="description" disabled>{{ $notification->description }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group has-success">
+                        <label class="control-label" style="font-size: 120%" for="name">{{ _t('Advertisement Photo', [], $_SESSION['lang']) }}</label>
+                        <div class="row">
+                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail" style="width: 500px; height: 300px;">
+                                    @if($notification->photo)
+                                        <img src="{!! url('/').'/uploads/advertisement/'.$notification->photo !!}" alt="profile pic">
+                                    @else
+                                        <img src="http://placehold.it/500x300" alt="{{ _t('advertisement photo', [], $_SESSION['lang']) }}">
+                                    @endif
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group has-success">
+                        <label class="control-label" style="font-size: 120%" for="name">{{ _t('Expired Date', [], $_SESSION['lang']) }}</label>
+                        <div>
+                            <input type="text" class="form-control pull-right" id="expired" name="expired" size="20" disabled placeholder="expired date" value="{{ $notification->expired }}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mar-10" style="padding-top:30px;">
+                        <div class="col-lg-6">
+                        <input type="button" value="{{ _t('Back', [], $_SESSION['lang']) }}" style="font-size: 120%" class="btn btn-danger btn-block btn-md btn-responsive" onclick="javascript:history.back();">
+                        </div>
+                        <div class="col-lg-6">
+                        <input type="submit" value="{{ _t('Edit Advertisement', [], $_SESSION['lang']) }}" style="font-size: 120%" class="btn btn-success btn-block btn-md btn-responsive" onclick="editNotification()">
+                        </div>
+                    </div>
+                <!--</form>-->
+    </div>
+
+@stop
+
+{{-- page level scripts --}}
+@section('footer_scripts')
+
+    <script src="{{asset('assets/vendors/tinymce/tinymce.min.js')}}" type="text/javascript"></script>
+    <script  src="{{ asset('assets/vendors/ckeditor/js/ckeditor.js') }}"  type="text/javascript"></script>
+    <script  src="{{ asset('assets/vendors/ckeditor/js/jquery.js') }}"  type="text/javascript" ></script>
+    <script  src="{{ asset('assets/vendors/ckeditor/js/config.js') }}"  type="text/javascript"></script>
+    <script  src="{{ asset('assets/js/pages/editor.js') }}"  type="text/javascript"></script>
+    <script src="{{ asset('assets/vendors/jasny-bootstrap/js/jasny-bootstrap.js') }}" ></script>
+    <script src="/vendors/daterangepicker/moment.min.js" type="text/javascript"></script>
+    <script src="/vendors/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+    <script src="/vendors/datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="/vendors/clockface/clockface.js" type="text/javascript"></script>
+    <script src="/vendors/jasny-bootstrap/jasny-bootstrap.min.js" type="text/javascript"></script>
+    <script>
+        $("#expired").daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            format: 'YYYY-MM-DD',
+        });
+        function editNotification(){
+            location.href="{{ url('/admin/advertisement/'.$notification->id.'/edit') }}";
+        }
+    </script>
+
+@stop

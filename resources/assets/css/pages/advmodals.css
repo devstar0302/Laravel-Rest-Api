@@ -1,0 +1,25 @@
+.md-content-yellow {
+    background: #F7F572;
+}
+.md-content-blue{
+    background:#128bc6;
+}
+.md-content-green{
+    background: #01BC8C;
+}
+.md-content-red{
+    background: #EF6F6C;
+}
+.md-content-white{
+    background: #fff;
+    color:#333;
+}
+.md-content-orange{
+    background: #F89A14;
+}
+.modal-panel .btn {
+    margin-bottom: 10px;
+}
+.btn-yellow{
+    background: #F7F572;
+}
